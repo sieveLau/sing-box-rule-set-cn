@@ -18,7 +18,7 @@ apnic = [
 ]
 
 maxmind = [
-    https://raw.githubusercontent.com/alecthw/mmdb_china_ip_list/release/Country.mmdb
+    "https://raw.githubusercontent.com/alecthw/mmdb_china_ip_list/release/Country.mmdb"
 ]
 
 adguard = [
