@@ -2,7 +2,7 @@ name: "Update sing-box rule-set"
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * 1"
   workflow_dispatch:
 
 jobs:
@@ -27,22 +27,23 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip3 install -r requirements.txt
+      - name: Set env variables
+        run: |
+          echo "RELEASE_NAME=Released on $(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+  
       - name: "Update rule-set"
         run: |
             set -Eeuo pipefail
             source venv/bin/activate
             python3 generate_rule_set.py
-      - name: "Commit and push"
+      - name: Release and upload
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: false
+          files: |
+            ./rule-set/*.srs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-            set -Eeuo pipefail
-            cd rule-set
-            git init
-            git config --local user.name "github-actions[bot]"
-            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add .
-            git commit --allow-empty-message --no-edit
-            git branch -M rule-set
-            git remote add origin https://github-action:$GITHUB_TOKEN@github.com/Dreista/sing-box-rule-set-cn.git
-            git push -u origin rule-set --force
+      
