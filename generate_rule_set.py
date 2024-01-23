@@ -7,9 +7,6 @@ import os
 from aggregate6 import aggregate
 
 dnsmasq_china_list = [
-    "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf",
-    "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/apple.china.conf",
-    "https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf"
 ]
 
 chnroutes2 = [
@@ -21,11 +18,10 @@ apnic = [
 ]
 
 maxmind = [
-    "https://raw.githubusercontent.com/Dreamacro/maxmind-geoip/release/Country.mmdb"
+    https://raw.githubusercontent.com/alecthw/mmdb_china_ip_list/release/Country.mmdb
 ]
 
 adguard = [
-    "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
 ]
 
 output_dir = "./rule-set"
